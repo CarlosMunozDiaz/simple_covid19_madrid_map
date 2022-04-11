@@ -44,8 +44,6 @@ function main(error, distritosAux, data) {
         .domain([120,262])
         .range(['#56f9ff', '#46d2d9', '#36adb4', '#268990', '#17666e', '#09464d', '#00282f']);
 
-    console.log(color.quantiles());
-
     mapLayer1.selectAll(".dist1")
         .data(distritos.features)
         .enter()
@@ -59,6 +57,19 @@ function main(error, distritosAux, data) {
         })
         .attr("d", path);
 
+    mapLayer1.append("g")
+        .selectAll("labels")
+        .data(distritos.features)
+        .enter()
+        .append("text")
+        .attr("x", function(d){return path.centroid(d)[0]})
+        .attr("y", function(d){return path.centroid(d)[1]})
+        .text(function(d){ return d.data[0].id_distrito; })
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central")
+        .style("font-size", 11)
+        .style("fill", "white");
+
     mapLayer2.selectAll(".dist2")
         .data(distritos.features)
         .enter()
@@ -71,4 +82,17 @@ function main(error, distritosAux, data) {
             return color(+d.data[1].tasa_incidencia_media_anual);
         })
         .attr("d", path);
+
+    mapLayer2.append("g")
+        .selectAll("labels")
+        .data(distritos.features)
+        .enter()
+        .append("text")
+        .attr("x", function(d){return path.centroid(d)[0]})
+        .attr("y", function(d){return path.centroid(d)[1]})
+        .text(function(d){ return d.data[1].id_distrito; })
+        .attr("text-anchor", "middle")
+        .attr("alignment-baseline", "central")
+        .style("font-size", 11)
+        .style("fill", "white");
 }
