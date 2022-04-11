@@ -40,6 +40,12 @@ function main(error, distritosAux, data) {
     projection = d3_composite.geoConicConformalSpain().scale(2000).fitSize([width,height], distritos);
     path = d3.geoPath(projection);
 
+    let color = d3.scaleQuantile()
+        .domain([120,262])
+        .range(['#56f9ff', '#46d2d9', '#36adb4', '#268990', '#17666e', '#09464d', '#00282f']);
+
+    console.log(color.quantiles());
+
     mapLayer1.selectAll(".dist1")
         .data(distritos.features)
         .enter()
@@ -49,17 +55,7 @@ function main(error, distritosAux, data) {
         .style('stroke-width','0.6px')
         .style('opacity', '1')
         .style("fill", function(d) {
-            if(parseInt(d.data[0].casos_totales) >= 2600 & parseInt(d.data[0].casos_totales) < 7480) {
-                return '#ffe6b7';
-            } else if (parseInt(d.data[0].casos_totales) >= 7480 & parseInt(d.data[0].casos_totales) < 12360) {
-                return '#fecc7b';
-            } else if (parseInt(d.data[0].casos_totales) >= 12360 & parseInt(d.data[0].casos_totales) < 17240) {
-                return '#f8b05c';
-            } else if (parseInt(d.data[0].casos_totales) >= 17240 & parseInt(d.data[0].casos_totales) < 22120) {
-                return '#f1944d';
-            } else if (parseInt(d.data[0].casos_totales) >= 22120) {
-                return '#e37a42';
-            }
+            return color(+d.data[0].tasa_incidencia_media_anual);
         })
         .attr("d", path);
 
@@ -72,17 +68,7 @@ function main(error, distritosAux, data) {
         .style('stroke-width','0.6px')
         .style('opacity', '1')
         .style("fill", function(d) {
-            if(parseInt(d.data[1].casos_totales) >= 2600 & parseInt(d.data[1].casos_totales) < 7480) {
-                return '#ffe6b7';
-            } else if (parseInt(d.data[1].casos_totales) >= 7480 & parseInt(d.data[1].casos_totales) < 12360) {
-                return '#fecc7b';
-            } else if (parseInt(d.data[1].casos_totales) >= 12360 & parseInt(d.data[1].casos_totales) < 17240) {
-                return '#f8b05c';
-            } else if (parseInt(d.data[1].casos_totales) >= 17240 & parseInt(d.data[1].casos_totales) < 22120) {
-                return '#f1944d';
-            } else if (parseInt(d.data[1].casos_totales) >= 22120) {
-                return '#e37a42';
-            }
+            return color(+d.data[1].tasa_incidencia_media_anual);
         })
         .attr("d", path);
 }
