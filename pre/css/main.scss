@@ -27,12 +27,26 @@ body {
 }
 
 .legend {
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 12px;
+
+    &--up {
+
+    }
+
+    &--down {
+
+    }
 
 }
 
 .b-map {
     display: flex;
     justify-content: space-between;
+
+    margin-top: 12px;
 
     .map {
         width: 50%;
@@ -44,4 +58,6 @@ body {
     font-size: 1em;
     font-weight: 300;
     line-height: 1.1;
+
+    margin-top: 6px;
 }

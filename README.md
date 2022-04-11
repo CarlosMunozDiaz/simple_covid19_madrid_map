@@ -1,6 +1,4 @@
-## Visualización con la evolución de la tasa de mortalidad por alzheimer en España
-
-Visualización que mide la evolución de la tasa de mortalidad por alzheimer en España
+## Visualización de la incidencia de la COVID-19 en los distritos de Madrid en 2020 y 2021
 
 ## Licencia
 
